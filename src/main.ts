@@ -1,4 +1,6 @@
 import { app, BrowserWindow } from 'electron' 
+import { join, dirname } from 'path'
+import { fileURLToPath } from 'url'
 
 if(!app.requestSingleInstanceLock()) {
     app.quit();
@@ -6,10 +8,13 @@ if(!app.requestSingleInstanceLock()) {
 }
 
 function createWindow(): void {
+    const _dirname: string = dirname(fileURLToPath(import.meta.url));
+
     const window: BrowserWindow = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
+            preload: join(_dirname, './preload.js'),
             contextIsolation: true
         }
     })
