@@ -2,7 +2,7 @@
   "name": "electron-esm-vite",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/src/main.js",
+  "main": "./dist/src/electron/main.js",
   "type": "module",
   "scripts": {
     "dev": "npm run build && concurrently \"vite\" \"electron .\"",

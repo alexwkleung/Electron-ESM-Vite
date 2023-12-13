@@ -15,7 +15,7 @@ function createWindow(): void {
         height: 600,
         webPreferences: {
             //see support matrix: https://www.electronjs.org/docs/latest/tutorial/esm
-            preload: join(_dirname, './preload.mjs'), //preload must be mjs with contextIsolated and unsandboxed renderer
+            preload: join(_dirname, './preload/preload.mjs'), //preload must be mjs with contextIsolated and unsandboxed renderer
             contextIsolation: true,
             sandbox: false, //cannot use ESM in sandboxed renderer
         }

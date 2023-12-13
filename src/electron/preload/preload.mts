@@ -1,6 +1,6 @@
 import { contextBridge } from 'electron'
 import process from 'process'
-import { electronAPI, versionsAPI } from './expose-api.mjs'
+import { electronAPI, versionsAPI } from '../../expose-api/expose-api.mjs'
 
 const versions = {
     node: (): string => process.versions.node,
@@ -14,6 +14,8 @@ async function exposeAPI(): Promise<void> {
             contextBridge.exposeInMainWorld('electron', electronAPI);
 
             contextBridge.exposeInMainWorld('versions', versionsAPI);
+
+            console.log('foo');
         } catch(e) {
             console.error(e);
         }
