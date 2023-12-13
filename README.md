@@ -1,6 +1,6 @@
 # Electron ESM Vite
 
-Sample project using Vite with Electron. Not 100% tested (no preload or renderer for now but will add later).
+Sample project using Vite with Electron. Not 100% tested (no preload for now but will add later).
 
 # Setup
 
