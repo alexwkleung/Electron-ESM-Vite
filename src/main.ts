@@ -14,12 +14,17 @@ function createWindow(): void {
         width: 800,
         height: 600,
         webPreferences: {
-            preload: join(_dirname, './preload.js'),
-            contextIsolation: true
+            //see support matrix: https://www.electronjs.org/docs/latest/tutorial/esm
+            preload: join(_dirname, './preload.mjs'), //preload must be mjs with contextIsolated and unsandboxed renderer
+            contextIsolation: true,
+            sandbox: false, //cannot use ESM in sandboxed renderer
         }
     })
 
+    //load vite dev server url
     window.loadURL('http://localhost:5173');
+
+    window.webContents.openDevTools();
 }
 
 function initWindow(): void {
