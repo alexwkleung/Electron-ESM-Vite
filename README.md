@@ -34,3 +34,8 @@ It will do the following steps:
 2. Launch Vite dev server.
 3. Spawn Electron process in root directory and load dev server URL in the browser window.
 4. Renderer is **contextIsolated** and **unsanboxed** in order to execute **ESM** preload scripts. As the renderer is contextIsolated and unsandboxed, all preload scripts **must** have the `.mjs` extension.
+
+# To-Do
+
+1. HMR support
+2. Package app
