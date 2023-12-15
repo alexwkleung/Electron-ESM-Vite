@@ -1,0 +1,31 @@
+appId: com.electron-esm-vite.app
+productName: Electron ESM Vite
+files:
+  - '!node_modules/*'
+  - '!dist/*'
+  - 'out/main.js'
+extraFiles: 
+  - 'out'
+  - 'out/preload/preload.js'
+  - 'out/renderer/renderer.js'
+  - 'out/main.js'
+asarUnpack:
+  - resources/**
+win:
+  executableName: electron-esm-vite
+nsis:
+  artifactName: ${name}-${version}-setup.${ext}
+  shortcutName: ${productName}
+  uninstallDisplayName: ${productName}
+  createDesktopShortcut: always
+mac:
+  extendInfo:
+    - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
+dmg:
+  artifactName: ${name}-${version}.${ext}
+linux:
+  target:
+    - AppImage
+    - snap
+    - deb
+  maintainer: username

@@ -1,6 +1,6 @@
 import { contextBridge } from 'electron'
 import process from 'process'
-import { electronAPI, versionsAPI } from '../../expose-api/expose-api.mjs'
+import { electronAPI, versionsAPI } from '../expose-api/expose-api.mjs'
 
 function exposeAPI(): void {
     if(process.contextIsolated) {
@@ -9,7 +9,7 @@ function exposeAPI(): void {
 
             contextBridge.exposeInMainWorld('versions', versionsAPI);
 
-            console.log('foo');
+            console.log('foobar from preload');
         } catch(e) {
             console.error(e);
         }
