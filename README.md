@@ -30,6 +30,12 @@ Run dev server
 npm run dev
 ```
 
+Run unit tests
+
+```bash
+npm run test
+```
+
 Package app for distribution
 
 ```bash
