@@ -1,6 +1,41 @@
 import { app, BrowserWindow } from 'electron' 
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
+import chokidar from 'chokidar'
+import { exec } from 'child_process'
+
+const chokidarPaths: string[] = [
+    'src/electron/main.ts', 
+    'src/electron/renderer/renderer.ts', 
+    'src/electron/renderer/*.ts',
+    'src/electron/renderer/**/*.ts',
+    'src/electron/preload/preload.mts', 
+    'src/electron/preload/preload.d.ts', 
+    'index.html', 
+    'src/electron/expose-api/*.d.ts',
+    'src/electron/expose-api/*.mts',
+    'src/electron/expose-api/**/.mts'
+];
+
+const chokidarDev = (): void => {
+    chokidar.watch(chokidarPaths).on('all', (event, path) => {
+        if(event === 'change') {
+            console.log("File changed: " + path);
+    
+            try {
+                setTimeout(() => {
+                    process.kill(process.pid);
+
+                    exec('npm run electron');
+                }, 1100)
+                
+                exec('npm run build');
+            } catch(e) {
+                throw console.error(e);
+            }    
+        }
+    })
+}
 
 //prevent multiple electron instances from running
 if(!app.requestSingleInstanceLock()) {
@@ -22,12 +57,17 @@ function createWindow(): void {
         }
     })
 
+    window.webContents.reloadIgnoringCache();
+
     if(!app.isPackaged) {        
         //load vite dev server url
         window.loadURL('http://localhost:5173');
 
         //open dev tools
         window.webContents.openDevTools();
+
+        //run chokidar watch for HMR in dev
+        chokidarDev();
     } else {
         //in packaged app, load index.html
         window.loadFile(join(_dirname, 'index.html'))

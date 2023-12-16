@@ -1,8 +1,10 @@
 # Electron ESM Vite
 
-Sample project using Vite with Electron. Not 100% tested.
+Example project using Vite with Electron. Not 100% tested.
 
 # Setup
+
+Fork repository (optional)
 
 Clone repository
 
@@ -28,13 +30,6 @@ Run dev server
 npm run dev
 ```
 
-It will do the following steps:
-
-1. Compile TypeScript files (TSC) and other production files (Vite) into `out`.
-2. Launch Vite dev server. Vite will serve the `out` directory. Loaded files will be based on production version and not development.
-3. Spawn Electron process in root directory and load Vite dev server URL in the browser window.
-4. Renderer is **contextIsolated** and **unsanboxed** in order to execute **ESM** preload scripts. As the renderer is contextIsolated and unsandboxed, all preload scripts **must** have the `.mjs` extension.
-
 Package app for distribution
 
 ```bash
@@ -50,6 +45,17 @@ npm run package:linux
 
 The packaged app can be found in `dist`.
 
-# To-Do
+# Development server, HMR support, Production files
 
-1. HMR support
+When you run `npm run dev`, it will do the following steps:
+
+1. Compile TypeScript files (TSC) and other production files (Vite) into `out`. The main entry point for Electron needs to be compiled to `.js`.
+2. Launch Vite dev server. Vite will serve the root directory during development. Loaded files will be based on the non-compiled/bundled version (i.e., `.ts`)
+3. Spawn Electron process in root directory and load Vite dev server URL in the browser window.
+4. Renderer is **contextIsolated** and **unsanboxed** in order to execute **ESM** preload scripts. As the renderer is contextIsolated and unsandboxed, all preload scripts **must** have the `.mjs` extension.
+5. When `index.html`, preload, renderer, and main files detect a change, it will rebuild the production files, kill the current Electron process, and re-spawn a new Electron process.
+6. Updating CSS during development will be handled by Vite HMR.
+
+# License
+
+[MIT License.](https://github.com/alexwkleung/Electron-ESM-Vite/blob/main/LICENSE)

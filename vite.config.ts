@@ -5,5 +5,9 @@ export default defineConfig({
         outDir: './out',
         emptyOutDir: true
     },
+    server: {
+        port: 5173,
+        strictPort: true
+    },
     base: ''
 });

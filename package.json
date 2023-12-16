@@ -1,7 +1,7 @@
 {
   "name": "electron-esm-vite",
   "version": "1.0.0",
-  "description": "",
+  "description": "Example project using Vite with Electron",
   "productName": "Electron ESM Vite",
   "main": "./out/main.js",
   "type": "module",
@@ -22,14 +22,15 @@
     ]
   },
   "scripts": {
-    "dev": "npm run build && concurrently \"vite serve ./out/\" \"electron .\"",
+    "dev": "npm run build && concurrently \"vite serve .\" \"electron .\"",
     "build": "vite build && tsc",
     "preview": "vite preview",
+    "electron": "electron .",
     "package:mac": "npm run build && electron-builder --mac --universal",
     "package:windows": "npm run build && electron-builder --windows",
     "package:linux": "npm run build && electron-builder --linux"
   },
-  "author": "",
+  "author": "alexwkleung",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.10.4",
@@ -41,5 +42,8 @@
     "eslint": "^8.55.0",
     "typescript": "^5.3.3",
     "vite": "^5.0.8"
+  },
+  "dependencies": {
+    "chokidar": "^3.5.3"
   }
 }
