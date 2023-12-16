@@ -13,8 +13,9 @@ const chokidarPaths: string[] = [
     'src/electron/preload/preload.d.ts', 
     'index.html', 
     'src/electron/expose-api/*.d.ts',
+    'src/electron/expose-api/**/*.d.ts',
     'src/electron/expose-api/*.mts',
-    'src/electron/expose-api/**/.mts'
+    'src/electron/expose-api/**/*.mts'
 ];
 
 const chokidarDev = (): void => {
