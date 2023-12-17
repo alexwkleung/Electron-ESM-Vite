@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron' 
+import { app, BrowserWindow, ipcMain, dialog } from 'electron' 
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import chokidar from 'chokidar'
@@ -38,16 +38,28 @@ const chokidarDev = (): void => {
     })
 }
 
-//prevent multiple electron instances from running
-if(!app.requestSingleInstanceLock()) {
-    app.quit();
-    process.exit(0);
+let window: BrowserWindow = {} as BrowserWindow;
+
+function ipcHandlers(): void {
+    ipcMain.handle('alert', (_: Electron.IpcMainInvokeEvent, message: string) => {
+        dialog.showMessageBox(window, {
+            message: message
+        });
+    })
+}
+
+function singleInstance(): void {
+    //prevent multiple electron instances from running
+    if(!app.requestSingleInstanceLock()) {
+        app.quit();
+        process.exit(0);
+    }
 }
 
 function createWindow(): void {
     const _dirname: string = dirname(fileURLToPath(import.meta.url));
 
-    const window: BrowserWindow = new BrowserWindow({
+    window = new BrowserWindow({
         width: 800,
         height: 600,
         webPreferences: {
@@ -93,4 +105,15 @@ function initWindow(): void {
         })
     })
 }
-initWindow();
+
+function buildMainWindow(): void {
+    //ipc handlers
+    ipcHandlers();
+
+    //single instance
+    singleInstance();
+
+    //initialize window
+    initWindow();
+}
+buildMainWindow();

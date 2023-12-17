@@ -1,6 +1,6 @@
 function renderer(): void {
     window.addEventListener('DOMContentLoaded', () => {
-        alert("Alert from renderer");
+        window.electron.ipcRenderer.invoke('alert', 'Alert from renderer');
 
         console.log("foobar from renderer");
 
