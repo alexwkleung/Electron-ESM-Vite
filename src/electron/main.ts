@@ -2,6 +2,7 @@ import { app, BrowserWindow, ipcMain, dialog } from 'electron'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import chokidar from 'chokidar'
+import process from 'node:process'
 import { exec } from 'child_process'
 
 const chokidarPaths: string[] = [
@@ -19,18 +20,18 @@ const chokidarPaths: string[] = [
 ];
 
 const chokidarDev = (): void => {
-    chokidar.watch(chokidarPaths).on('all', (event, path) => {
-        if(event === 'change') {
+    chokidar.watch(chokidarPaths).on('all', (event: 'change', path: string) => {
+        if(event === 'change' && path !== null && path !== undefined) {
             console.log("File changed: " + path);
     
             try {
+                exec('npm run build');
+                
                 setTimeout(() => {
                     process.kill(process.pid);
 
                     exec('npm run electron');
-                }, 1100)
-                
-                exec('npm run build');
+                }, 2500)
             } catch(e) {
                 throw console.error(e);
             }    
