@@ -58,9 +58,10 @@ When you run `npm run dev`, it will do the following steps:
 1. Compile TypeScript files (TSC) and other production files (Vite) into `out`. The main entry point for Electron needs to be compiled to `.js`.
 2. Launch Vite dev server. Vite will serve the root directory during development. Loaded files will be based on the non-compiled/bundled version (i.e., `.ts`)
 3. Spawn Electron process in root directory and load Vite dev server URL in the browser window.
-4. Renderer is **contextIsolated** and **unsanboxed** in order to execute **ESM** preload scripts. As the renderer is contextIsolated and unsandboxed, all preload scripts **must** have the `.mjs` extension.
-5. When `index.html`, main, preload, and renderer files detect a change, it will rebuild the production files, kill the current Electron process, and re-spawn a new Electron process. **Chokidar** is a *dependency* for the HMR implementation, so don't remove it.
-6. Updating CSS during development will be handled by Vite HMR.
+4. Run `cli.js` to activate HMR.
+5. Renderer is **contextIsolated** and **unsanboxed** in order to execute **ESM** preload scripts. As the renderer is contextIsolated and unsandboxed, all preload scripts **must** have the `.mjs` extension.
+6. When `index.html`, main, preload, and renderer files detect a change, it will rebuild the production files, kill the current Electron process, and re-spawn a new Electron process. **Chokidar** is a *dependency* for the HMR implementation, so don't remove it.
+7. Updating CSS during development will be handled by Vite HMR.
 
 Note: `.hmr_pid.txt` is an output file for the current Electron PID, which is used in HMR.
 
