@@ -27,7 +27,9 @@
     "electron": "electron .",
     "package:mac": "npm run build && electron-builder --mac --universal",
     "package:windows": "npm run build && electron-builder --windows",
-    "package:linux": "npm run build && electron-builder --linux"
+    "package:linux": "npm run build && electron-builder --linux",
+    "eslint": "eslint .",
+    "eslint:fix": "eslint . --fix"
   },
   "author": "alexwkleung",
   "license": "MIT",
