@@ -29,7 +29,7 @@ const chokidarDev = () => {
 
             try {                  
                 exec('npm run build').on('exit', () => {
-                    fs.readFile('pid.txt', { encoding: 'utf-8' }, (err, data) => {
+                    fs.readFile('hmr_pid.txt', { encoding: 'utf-8' }, (err, data) => {
                         if(err) {
                             throw console.error(err);
                         } else {
