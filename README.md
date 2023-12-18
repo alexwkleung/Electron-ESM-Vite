@@ -62,6 +62,8 @@ When you run `npm run dev`, it will do the following steps:
 5. When `index.html`, main, preload, and renderer files detect a change, it will rebuild the production files, kill the current Electron process, and re-spawn a new Electron process. **Chokidar** is a *dependency* for the HMR implementation, so don't remove it.
 6. Updating CSS during development will be handled by Vite HMR.
 
+Note: `hmr_pid.txt` is an output file for the current Electron PID, which is used in HMR.
+
 # To-Do
 
 1. Framework support

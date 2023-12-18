@@ -1,45 +1,20 @@
 import { app, BrowserWindow, ipcMain, dialog } from 'electron' 
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'url'
-import chokidar from 'chokidar'
 import process from 'node:process'
-import { exec } from 'child_process'
+import * as fs from 'fs'
 
-const chokidarPaths: string[] = [
-    'src/electron/main.ts', 
-    'src/electron/renderer/renderer.ts', 
-    'src/electron/renderer/*.ts',
-    'src/electron/renderer/**/*.ts',
-    'src/electron/preload/preload.mts', 
-    'src/electron/preload/preload.d.ts', 
-    'index.html', 
-    'src/electron/expose-api/*.d.ts',
-    'src/electron/expose-api/**/*.d.ts',
-    'src/electron/expose-api/*.mts',
-    'src/electron/expose-api/**/*.mts'
-];
+let window: BrowserWindow = {} as BrowserWindow;
 
-const chokidarDev = (): void => {
-    chokidar.watch(chokidarPaths).on('all', (event: 'change', path: string) => {
-        if(event === 'change' && path !== null && path !== undefined) {
-            console.log("File changed: " + path);
-    
-            try {
-                exec('npm run build');
-                
-                setTimeout(() => {
-                    process.kill(process.pid);
-
-                    exec('npm run electron');
-                }, 2500)
-            } catch(e) {
-                throw console.error(e);
-            }    
+//DON'T REMOVE IF YOU WANT HMR IN DEV
+function hmr(): void {
+    //write Electron PID to .dev_hmr.env
+    fs.writeFile('pid.txt', String(process.pid), (err) => {
+        if(err) {
+            throw console.error(err);
         }
     })
 }
-
-let window: BrowserWindow = {} as BrowserWindow;
 
 function ipcHandlers(): void {
     ipcMain.handle('alert', (_: Electron.IpcMainInvokeEvent, message: string) => {
@@ -79,9 +54,6 @@ function createWindow(): void {
 
         //open dev tools
         window.webContents.openDevTools();
-
-        //run chokidar watch for HMR in dev
-        chokidarDev();
     } else {
         //in packaged app, load index.html
         window.loadFile(join(_dirname, 'index.html'))
@@ -108,6 +80,9 @@ function initWindow(): void {
 }
 
 function buildMainWindow(): void {
+    //hmr dev
+    hmr();
+
     //ipc handlers
     ipcHandlers();
 
