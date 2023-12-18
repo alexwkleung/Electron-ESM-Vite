@@ -9,7 +9,7 @@ let window: BrowserWindow = {} as BrowserWindow;
 //DON'T REMOVE IF YOU WANT HMR IN DEV
 function hmr(): void {
     //write Electron PID to .dev_hmr.env
-    fs.writeFile('hmr_pid.txt', String(process.pid), (err) => {
+    fs.writeFile('.hmr_pid.txt', String(process.pid), (err) => {
         if(err) {
             throw console.error(err);
         }

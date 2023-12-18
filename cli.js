@@ -19,6 +19,18 @@ const chokidarPaths = [
 ];
 
 const chokidarDev = () => {
+    fs.open('.hmr_pid.txt', 'w', (err, fd) => {
+        if(err) {
+            throw console.error(err);
+        }
+        
+        fs.close(fd, (err) => {
+            if(err) {
+                throw console.error(err);
+            }
+        })
+    })
+
     console.log("HMR is active");
 
     chokidar.watch(chokidarPaths).on('all', (event, path) => {
@@ -29,7 +41,7 @@ const chokidarDev = () => {
 
             try {                  
                 exec('npm run build').on('exit', () => {
-                    fs.readFile('hmr_pid.txt', { encoding: 'utf-8' }, (err, data) => {
+                    fs.readFile('.hmr_pid.txt', { encoding: 'utf-8' }, (err, data) => {
                         if(err) {
                             throw console.error(err);
                         } else {
