@@ -5,20 +5,6 @@
   "productName": "Electron ESM Vite",
   "main": "./out/main.js",
   "type": "module",
-  "build": {
-    "files": [
-      "./out/**/*",
-      "./out/index.html",
-      "./out/assets/*",
-      "./out/assets/**/*",
-      "./out/main.js",
-      "./out/renderer/renderer.js",
-      "./out/renderer/**/*.js",
-      "./out/preload/preload.mjs",
-      "./out/expose-api/expose-api.mjs",
-      "./out/expose-api/**/*.mjs"
-    ]
-  },
   "scripts": {
     "dev": "npm run build && concurrently \"vite serve .\" \"electron .\" \"node ./cli.js\"",
     "build": "vite build && tsc",

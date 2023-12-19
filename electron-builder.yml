@@ -3,12 +3,16 @@ productName: Electron ESM Vite
 files:
   - '!node_modules/*'
   - '!dist/*'
-  - 'out/main.js'
-extraFiles: 
-  - 'out'
-  - 'out/preload/preload.js'
-  - 'out/renderer/renderer.js'
-  - 'out/main.js'
+  -  './out/**/*'
+  -  './out/index.html'
+  -  './out/assets/*'
+  -  './out/assets/**/*'
+  -  './out/main.js'
+  -  './out/renderer/renderer.js'
+  -  './out/renderer/**/*.js'
+  -  './out/preload/preload.mjs'
+  -  './out/expose-api/expose-api.mjs'
+  -  './out/expose-api/**/*.mjs'
 asarUnpack:
   - resources/**
 win:
