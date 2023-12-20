@@ -4,8 +4,15 @@ Example project using Vite with Electron.
 
 Features out of the box:
 
-1. [ESM support in Electron](https://www.electronjs.org/docs/latest/tutorial/esm#summary-esm-support-matrix) (as of v28.0.0)
-2. HMR (Hot-Module Replacement)
+1. [ESM support in Electron](https://www.electronjs.org/docs/latest/tutorial/esm#summary-esm-support-matrix) (as of v28.0.0).
+2. HMR (Hot-Module Replacement).
+
+# Notice on usage
+
+1. As of now the example project should suffice for scaffolding a new project.
+2. Migrating an existing project to use this as a base is possible for most cases.
+
+[Submit a issue](https://github.com/alexwkleung/Electron-ESM-Vite/issues) if you have problems with the setup or migration process.
 
 # Setup
 
@@ -61,7 +68,7 @@ The packaged app can be found in `dist`.
 When you run `npm run dev`, it will do the following steps:
 
 1. Compile TypeScript files (TSC) and other production files (Vite) into `out`. The main entry point for Electron needs to be compiled to `.js`.
-2. Launch Vite dev server. Vite will serve the root directory during development. Loaded files will be based on the non-compiled/bundled version (i.e., `.ts`)
+2. Launch Vite dev server. Vite will serve the root directory during development. Loaded files will be based on the non-compiled/bundled version (i.e., `.ts`).
 3. Spawn Electron process in root directory and load Vite dev server URL in the browser window.
 4. Run `cli.js` to activate HMR.
 5. Renderer is **contextIsolated** and **unsanboxed** in order to execute **ESM** preload scripts. As the renderer is contextIsolated and unsandboxed, all preload scripts **must** have the `.mjs` extension.
@@ -71,10 +78,6 @@ When you run `npm run dev`, it will do the following steps:
 **Note 1**: `.hmr_pid.txt` is an output file for the current Electron PID, which is used in HMR.
 
 **Note 2**: If you are using a framework, you might need to update the glob pattern array in `chokidarPaths` and `chokidarPathsIgnore` within `cli.js`. 
-
-# To-Do
-
-1. Framework support examples
 
 # License
 
