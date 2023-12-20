@@ -1,11 +1,17 @@
 # Electron ESM Vite
 
-Example project using Vite with Electron.
+Vite + Electron + ESM project template. 
 
-Features out of the box:
+Quickly get started using Vite and ESM in Electron without heavy boilerplate.
+
+# Features 
+
+Out of the box:
 
 1. [ESM support in Electron](https://www.electronjs.org/docs/latest/tutorial/esm#summary-esm-support-matrix) (as of v28.0.0).
 2. HMR (Hot-Module Replacement).
+3. Vanilla TypeScript with ESLint.
+4. Vitest for unit testing.
 
 # Notice on usage
 
