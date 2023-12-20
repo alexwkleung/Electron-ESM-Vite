@@ -15,8 +15,19 @@ const chokidarPaths = [
     'src/electron/expose-api/*.d.ts',
     'src/electron/expose-api/**/*.d.ts',
     'src/electron/expose-api/*.mts',
-    'src/electron/expose-api/**/*.mts'
+    'src/electron/expose-api/**/*.mts',
+    'src/electron/**/*.ts',
+    'src/electron/**/*.mts',
+    'src/electron/**/*.d.ts',
+    'src/electron/**/*.html',
+    'src/electron/**/*',
+    'src/**/*'
 ];
+
+const chokidarPathsIgnore = [
+    'src/assets/*.scss',
+    'src/**/*.css',
+]
 
 const chokidarDev = () => {
     fs.open('.hmr_pid.txt', 'w', (err, fd) => {
@@ -33,7 +44,7 @@ const chokidarDev = () => {
 
     console.log("HMR is active");
 
-    chokidar.watch(chokidarPaths).on('all', (event, path) => {
+    chokidar.watch(chokidarPaths, { ignored: chokidarPathsIgnore }).on('all', (event, path) => {
         if(event === 'change' && path !== null && path !== undefined) {
             console.log("File changed: " + path);
 
