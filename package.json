@@ -17,7 +17,7 @@
     "eslint": "eslint .",
     "eslint:fix": "eslint . --fix"
   },
-  "author": "alexwkleung",
+  "author": "username",
   "license": "MIT",
   "devDependencies": {
     "@types/node": "^20.10.4",
