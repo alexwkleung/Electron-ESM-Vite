@@ -1,6 +1,6 @@
 {
   "name": "electron-esm-vite",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Vite + Electron + ESM project template",
   "productName": "Electron ESM Vite",
   "main": "./out/main.js",
