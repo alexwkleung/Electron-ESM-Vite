@@ -1,6 +1,11 @@
 # Electron ESM Vite
 
-Example project using Vite with Electron. Not 100% tested.
+Example project using Vite with Electron.
+
+Features out of the box:
+
+1. [ESM support in Electron](https://www.electronjs.org/docs/latest/tutorial/esm#summary-esm-support-matrix) (as of v28.0.0)
+2. HMR (Hot-Module Replacement)
 
 # Setup
 
@@ -63,11 +68,13 @@ When you run `npm run dev`, it will do the following steps:
 6. When `index.html`, main, preload, and renderer files detect a change, it will rebuild the production files, kill the current Electron process, and re-spawn a new Electron process. **Chokidar** is a *dependency* for the HMR implementation, so don't remove it.
 7. Updating CSS during development will be handled by Vite HMR.
 
-Note: `.hmr_pid.txt` is an output file for the current Electron PID, which is used in HMR.
+**Note 1**: `.hmr_pid.txt` is an output file for the current Electron PID, which is used in HMR.
+
+**Note 2**: If you are using a framework, you might need to update the glob pattern array in `chokidarPaths` and `chokidarPathsIgnore` within `cli.js`. 
 
 # To-Do
 
-1. Framework support
+1. Framework support examples
 
 # License
 
