@@ -81,9 +81,13 @@ When you run `npm run dev`, it will do the following steps:
 6. When `index.html`, main, preload, and renderer files detect a change, it will rebuild the production files, kill the current Electron process, and re-spawn a new Electron process. **Chokidar** is a *dependency* for the HMR implementation, so don't remove it.
 7. Updating CSS during development will be handled by Vite HMR.
 
-**Note 1**: `.hmr_pid.txt` is an output file for the current Electron PID, which is used in HMR.
+# Note 
 
-**Note 2**: If you are using a framework, you might need to update the glob pattern array in `chokidarPaths` and `chokidarPathsIgnore` within `cli.js`. 
+1. `.hmr_pid.txt` is an output file for the current Electron PID, which is used in HMR.
+
+2. If you are using a framework, you might need to update the glob pattern array in `chokidarPaths` and `chokidarPathsIgnore` within `cli.js`. 
+
+3. Vite's HMR is disabled in favour of Electron-ESM-Vite's custom one using Chokidar (`cli.js`/`hmr()`).
 
 # License
 
