@@ -30,17 +30,21 @@ const chokidarPaths = [
 const chokidarPathsIgnore = []
 
 const chokidarDev = () => {
-    fs.open('.hmr_pid.txt', 'w', (err, fd) => {
-        if(!err) {
+    try {
+        fs.open('.hmr_pid.txt', 'w', (err, fd) => {
+            if (err) {
+                throw err;
+            }
+    
             fs.close(fd, (err) => {
-                if(err) {
-                    throw console.error(err);
+                if (err) {
+                    throw err;
                 }
-            })
-        } else {
-            throw console.error(err);
-        }
-    })
+            }) 
+        })
+    } catch (e) {
+        console.error(e);
+    }
 
     console.log("HMR is active");
 
@@ -53,18 +57,18 @@ const chokidarDev = () => {
             try {                  
                 exec('npm run build').on('exit', () => {
                     fs.readFile('.hmr_pid.txt', { encoding: 'utf-8' }, (err, data) => {
-                        if(!err) {
-                            process.kill(data);
-                        } else {
-                            throw console.error(err);
+                        if (err) {
+                            throw err;
                         }
+                        
+                        process.kill(data);
                     })
 
                     console.log("Restarting Electron process...");
                     exec('npm run electron');
                 });
-            } catch(e) {
-                throw console.error(e);
+            } catch (e) {
+                console.error(e);
             }    
         }
     })
