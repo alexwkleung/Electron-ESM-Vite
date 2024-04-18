@@ -79,7 +79,6 @@ When you run `npm run dev`, it will do the following steps:
 4. Run `cli.js` to activate HMR.
 5. Renderer is **contextIsolated** and **unsanboxed** in order to execute **ESM** preload scripts. As the renderer is contextIsolated and unsandboxed, all preload scripts **must** have the `.mjs` extension.
 6. When `index.html`, main, preload, and renderer files detect a change, it will rebuild the production files, kill the current Electron process, and re-spawn a new Electron process. **Chokidar** is a *dependency* for the HMR implementation, so don't remove it.
-7. Updating CSS during development will be handled by Vite HMR.
 
 # Note 
 
@@ -88,6 +87,8 @@ When you run `npm run dev`, it will do the following steps:
 2. If you are using a framework, you might need to update the glob pattern array in `chokidarPaths` and `chokidarPathsIgnore` within `cli.js`. 
 
 3. Vite's HMR is disabled in favour of Electron-ESM-Vite's custom one using Chokidar (`cli.js`/`hmr()`).
+
+4. It is recommended to follow the same folder structure to avoid any path issues.
 
 # License
 
