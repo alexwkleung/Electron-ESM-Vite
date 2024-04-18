@@ -22,13 +22,12 @@ const chokidarPaths = [
     'src/electron/**/*.d.ts',
     'src/electron/**/*.html',
     'src/electron/**/*',
-    'src/**/*'
+    'src/**/*',
+    'src/assets/*.css',
+    'src/assets/*.scss'
 ];
 
-const chokidarPathsIgnore = [
-    'src/assets/*.scss',
-    'src/**/*.css',
-]
+const chokidarPathsIgnore = []
 
 const chokidarDev = () => {
     fs.open('.hmr_pid.txt', 'w', (err, fd) => {
